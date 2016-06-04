@@ -6,9 +6,7 @@ import org.apache.thrift.protocol._
 import java.nio.ByteBuffer
 import java.util.Arrays
 import scala.collection.immutable.{Map => immutable$Map}
-import scala.collection.mutable.{
-  ArrayBuffer => mutable$ArrayBuffer, Buffer => mutable$Buffer,
-  HashMap => mutable$HashMap, HashSet => mutable$HashSet}
+import scala.collection.mutable
 import scala.collection.{Map, Set}
 
 {{/public}}
