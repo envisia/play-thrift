@@ -20,6 +20,17 @@ and then add it to your project. and specifiy the following:
       "de.envisia" %% "play-thrift-runtime" % "0.0.1"
     )
 
+After that you could actually just create a new "Controller" that doesn't extend Play's default Controller instead use the name of your service + Abstract.
+I.e. if you have a service named 'NotificationService' you could actually extend that:
+
+    NotificationController @Inject()()(implicit ec: ExecutionContext) extend AbstractNotificationService(new TBinaryProtocol.Factory()) {
+    }
+
+Then you just need to define your service Functions, so either your IDE will tell you that you need to implement them or you could add them manually like:
+
+    def methodName(args): Future[Return]
+
+That's it.
 
 ## Status
 
