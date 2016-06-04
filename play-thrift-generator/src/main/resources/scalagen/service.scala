@@ -14,10 +14,42 @@ import scala.collection.{Map, Set}
 import scala.language.higherKinds
 import scala.concurrent.{ ExecutionContext, Future }
 
+
+trait {{ServiceName}}Methods {
+
+  {{#thriftFunctions}}
+  object {{funcObjectName}} extends ThriftMethod {
+  {{#functionArgsStruct}}
+  {{>struct}}
+  {{/functionArgsStruct}}
+
+  type SuccessType = {{typeName}}
+  {{#internalResultStruct}}
+  {{>struct}}
+  {{/internalResultStruct}}
+
+  val name = "{{originalFuncName}}"
+  val serviceName = "{{ServiceName}}"
+  val argsCodec = Args
+  val responseCodec = Result
+  val oneway = {{is_oneway}}
+  }
+
+  // Compatibility aliases.
+  val {{funcName}}$args = {{funcObjectName}}.Args
+  type {{funcName}}$args = {{funcObjectName}}.Args
+
+  val {{funcName}}$result = {{funcObjectName}}.Result
+  type {{funcName}}$result = {{funcObjectName}}.Result
+
+  {{/thriftFunctions}}
+
+}
+
 abstract class Abstract{{ServiceName}}(
     protocolFactory: TProtocolFactory,
     actionBuilder: ActionBuilder[Request]
-)(implicit ec: ExecutionContext) extends ThriftController(protocolFactory, actionBuilder) {
+)(implicit ec: ExecutionContext) extends ThriftController(protocolFactory, actionBuilder) with {{ServiceName}}Methods {
 
   def this(protocolFactory: TProtocolFactory) {
     this(protocolFactory, Action)
@@ -29,7 +61,7 @@ abstract class Abstract{{ServiceName}}(
 
 {{#withFinagle}}
 {{#asyncFunctions}}
-{{>function}}
+  {{>function}}
 {{/asyncFunctions}}
 {{/withFinagle}}
 

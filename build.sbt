@@ -1,4 +1,4 @@
-name := "play-thrift-core"
+name := "play-thrift"
 
 lazy val scalaV = "2.11.8"
 
@@ -8,8 +8,10 @@ licenses in ThisBuild += ("Apache-2.0", url("http://www.apache.org/licenses/LICE
 
 bintrayOrganization in ThisBuild := Some("envisia")
 
+organization in ThisBuild := "de.envisia"
+
 libraryDependencies in ThisBuild ++= Seq(
-  "org.apache.thrift" % "libthrift" % "0.9.3"
+  "org.apache.thrift" % "libthrift" % "0.9.3" % Provided
 )
 
 lazy val `play-thrift-core` = (project in file("play-thrift-core")).settings(

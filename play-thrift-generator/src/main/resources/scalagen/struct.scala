@@ -135,7 +135,7 @@ object {{StructName}} extends ThriftStructCodec3[{{StructName}}] {
 {{/required}}
 {{/fields}}
 
-    var _passthroughFields: Builder[(Short, TFieldBlob), immutable$Map[Short, TFieldBlob]] = null
+    var _passthroughFields: mutable.Builder[(Short, TFieldBlob), immutable$Map[Short, TFieldBlob]] = null
     var _done = false
     val _start_offset = _iprot.offset
 
@@ -202,7 +202,7 @@ object {{StructName}} extends ThriftStructCodec3[{{StructName}}] {
 {{/required}}
 {{/optional}}
 {{/fields}}
-    var _passthroughFields: Builder[(Short, TFieldBlob), immutable$Map[Short, TFieldBlob]] = null
+    var _passthroughFields: mutable.Builder[(Short, TFieldBlob), immutable$Map[Short, TFieldBlob]] = null
     var _done = false
 
     _iprot.readStructBegin()
@@ -430,7 +430,7 @@ class {{StructName}}(
 
 {{#isResponse}}
   def successField: Option[{{successFieldType}}] = {{successFieldValue}}
-  def exceptionFields: Iterable[Option[com.twitter.scrooge.ThriftException]] = {{exceptionValues}}
+  def exceptionFields: Iterable[Option[ThriftException]] = {{exceptionValues}}
 {{/isResponse}}
 
 {{#withFieldGettersAndSetters}}
