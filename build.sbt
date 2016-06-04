@@ -1,6 +1,8 @@
-name := "envisia-play-thrift"
+name := "play-thrift-core"
 
 lazy val scalaV = "2.11.8"
+
+publish := {}
 
 licenses in ThisBuild += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
@@ -40,10 +42,10 @@ lazy val `play-thrift-generator` = (project in file("play-thrift-generator")).se
 //  scalaVersion := "2.10.6"
 //).dependsOn(`play-thrift-core`, `play-thrift-generator`)
 
-lazy val example = (project in file("example")).settings(
-  scalaVersion := "2.11.8",
-  libraryDependencies ++= Seq(
-    "com.twitter" %% "scrooge-core" % "4.7.0",
-    "com.twitter" %% "finagle-thrift" % "6.34.0"
-  )
-)
+//lazy val example = (project in file("example")).settings(
+//  scalaVersion := "2.11.8",
+//  libraryDependencies ++= Seq(
+//    "com.twitter" %% "scrooge-core" % "4.7.0",
+//    "com.twitter" %% "finagle-thrift" % "6.34.0"
+//  )
+//)

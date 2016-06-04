@@ -22,7 +22,7 @@ abstract class ThriftController(
     actionBuilder: ActionBuilder[Request]
 )(implicit ec: ExecutionContext) extends Controller with SimpleRouter {
 
-  def this(protocolFactory: TProtocolFactory) = {
+  def this(protocolFactory: TProtocolFactory)(implicit ec: ExecutionContext) = {
     this(protocolFactory, Action)
   }
 
@@ -106,7 +106,7 @@ abstract class ThriftController(
         oprot.getTransport.flush()
         Future.successful(util.Arrays.copyOfRange(memoryBuffer.getArray(), 0, memoryBuffer.length()))
       } finally {
-        // resetBuffer(memoryBuffer)
+        resetBuffer(memoryBuffer)
       }
     } catch {
       case e: Exception => Future.failed(e)
