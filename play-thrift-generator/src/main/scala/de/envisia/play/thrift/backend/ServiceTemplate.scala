@@ -203,9 +203,34 @@ trait ServiceTemplate { self: TemplateGenerator =>
     includes: Seq[Include],
     options: Set[ServiceOption]
   ) = {
-    val withFinagle = options.contains(WithFinagle)
+    val withFinagle = true
     Dictionary(
+      "thriftServiceFunction" -> v(templates("thriftServiceFunction")),
       "function" -> v(templates("function")),
+      "functions" -> v(service.functions map {
+        f =>
+          Dictionary(
+            "serviceFuncNameForCompile" -> genID(f.funcName.toCamelCase),
+            "serviceFuncNameForWire" -> v(f.originalName),
+            "__stats_name" -> genID(f.funcName.toCamelCase.prepend("__stats_")),
+            "funcObjectName" -> genID(functionObjectName(f)),
+            "argNames" ->
+                v(f.args.map { field =>
+                  "args." + genID(field.sid).toData
+                }.mkString(", ")),
+            "typeName" -> genType(f.funcType),
+            "isVoid" -> v(f.funcType == Void || f.funcType == OnewayVoid),
+            "resultNamedArg" ->
+                v(if (f.funcType != Void && f.funcType != OnewayVoid) "success = Some(value)" else ""),
+            "exceptions" -> v(f.throws map {
+              t =>
+                Dictionary(
+                  "exceptionType" -> genType(t.fieldType),
+                  "fieldName" -> genID(t.sid)
+                )
+            })
+          )
+      }),
       "package" -> genID(namespace),
       "ServiceName" -> genID(service.sid.toTitleCase),
       "docstring" -> v(service.docstring.getOrElse("")),
@@ -257,12 +282,12 @@ trait ServiceTemplate { self: TemplateGenerator =>
           "unwrapArgs" -> v(unwrapArgs(f.args.length))
         ) + functionDictionary(f, Some("Future"))
       }),
-      "finagleClients" -> v(
-        if (withFinagle) Seq(finagleClient(service, namespace)) else Seq()
-      ),
-      "finagleServices" -> v(
-        if (withFinagle) Seq(finagleService(service, namespace)) else Seq()
-      ),
+//      "finagleClients" -> v(
+//        if (withFinagle) Seq(finagleClient(service, namespace)) else Seq()
+//      ),
+//      "finagleServices" -> v(
+//        if (withFinagle) Seq(finagleService(service, namespace)) else Seq()
+//      ),
       "disableCaseClass" -> {
         val isScala210 = Properties.releaseVersion.exists(_.startsWith("2.10"))
 

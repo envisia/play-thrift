@@ -23,8 +23,14 @@ abstract class Abstract{{ServiceName}}(
     this(protocolFactory, Action)
   }
 
+{{#functions}}
   {{>thriftServiceFunction}}
+{{/function}}
 
-  {{>function}}
+{{#withFinagle}}
+{{#asyncFunctions}}
+{{>function}}
+{{/asyncFunctions}}
+{{/withFinagle}}
 
 }

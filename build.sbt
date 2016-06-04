@@ -2,6 +2,10 @@ name := "envisia-play-thrift"
 
 lazy val scalaV = "2.11.8"
 
+licenses in ThisBuild += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
+
+bintrayOrganization in ThisBuild := Some("envisia")
+
 libraryDependencies in ThisBuild ++= Seq(
   "org.apache.thrift" % "libthrift" % "0.9.3"
 )
