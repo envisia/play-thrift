@@ -438,7 +438,7 @@ abstract class TemplateGenerator(val resolvedDoc: ResolvedDocument)
 
     doc.services.foreach {
       service =>
-        val interfaceFile = new File(packageDir, service.sid.toTitleCase.name + fileExtension)
+        val interfaceFile = new File(packageDir, "Abstract" + service.sid.toTitleCase.name + fileExtension)
         val finagleClientFileOpt = finagleClientFile(packageDir, service, serviceOptions)
         val finagleServiceFileOpt = finagleServiceFile(packageDir, service, serviceOptions)
 

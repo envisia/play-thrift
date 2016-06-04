@@ -1,7 +1,7 @@
 {{#public}}
 package {{package}}
 
-import com.twitter.scrooge.{ThriftStruct, ThriftStructCodec3, ThriftStructFieldInfo, ThriftUnion, TFieldBlob, ThriftUnionFieldInfo}
+import de.envisia.play.thrift.{ThriftStruct, ThriftStructCodec3, ThriftStructFieldInfo, ThriftUnion, TFieldBlob, ThriftUnionFieldInfo}
 import org.apache.thrift.protocol._
 import java.nio.ByteBuffer
 import java.util.Arrays

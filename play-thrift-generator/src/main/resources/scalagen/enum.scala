@@ -1,6 +1,6 @@
 package {{package}}
 
-import com.twitter.scrooge.ThriftEnum
+import de.envisia.play.thrift.ThriftEnum
 
 {{docstring}}
 @javax.annotation.Generated(value = Array("com.twitter.scrooge.Compiler"))

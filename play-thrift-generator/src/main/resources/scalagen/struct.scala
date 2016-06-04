@@ -1,7 +1,7 @@
 {{#public}}
 package {{package}}
 
-import com.twitter.scrooge.{
+import de.envisia.play.thrift.{
   LazyTProtocol,
   TFieldBlob, ThriftException, ThriftStruct, ThriftStructCodec3, ThriftStructFieldInfo,
   ThriftStructMetaData, ThriftUtil}

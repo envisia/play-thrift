@@ -12,7 +12,7 @@ import scala.collection.immutable.{Map => immutable$Map}
 import scala.collection.mutable
 import scala.collection.{Map, Set}
 import scala.language.higherKinds
-
+import scala.concurrent.{ ExecutionContext, Future }
 
 abstract class Abstract{{ServiceName}}(
     protocolFactory: TProtocolFactory,
