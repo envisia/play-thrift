@@ -51,7 +51,7 @@ abstract class Abstract{{ServiceName}}(
     actionBuilder: ActionBuilder[Request]
 )(implicit ec: ExecutionContext) extends ThriftController(protocolFactory, actionBuilder) with {{ServiceName}}Methods {
 
-  def this(protocolFactory: TProtocolFactory) {
+  def this(protocolFactory: TProtocolFactory)(implicit ec: ExecutionContext) {
     this(protocolFactory, Action)
   }
 
