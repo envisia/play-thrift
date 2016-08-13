@@ -22,7 +22,7 @@ lazy val `play-thrift-core` = (project in file("play-thrift-core")).settings(
 lazy val `play-thrift-runtime` = (project in file("play-thrift-runtime")).settings(
   scalaVersion := scalaV,
   libraryDependencies ++= Seq(
-    "com.typesafe.play" %% "play" % "2.5.3" % Provided
+    "com.typesafe.play" %% "play" % "2.5.4" % Provided
   )
 ).dependsOn(`play-thrift-core`)
 
